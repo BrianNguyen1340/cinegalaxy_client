@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
+@import 'normalize.css';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  user-select: none;
+}
+
+body {
+  font-family: 'Figtree', sans-serif;
+}
+
+a {
+  color: #0d0c22;
+}
+
+// dark overlay
+.dark-overlay {
+  content: '';
+  position: fixed;
+  visibility: visible;
+  z-index: 1;
+  top: 100px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (min-width: 1000px) {
+  .dark-overlay {
+    display: none !important;
+  }
+}
+
+button {
+  &:disabled {
+    cursor: no-drop;
+    background-color: #ddd;
+  }
+}
+
+// pagination
+.pagination {
+  display: flex;
+  list-style: none;
+  padding: 0;
+  justify-content: center;
+  margin: 40px 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.pagination li {
+  margin: 0 5px;
+}
+
+.pagination li a {
+  padding: 8px 16px;
+  border: 2px solid #ccc;
+  color: #00acc1;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination li a:hover {
+  border: 2px solid #00acc1;
+}
+
+.pagination .active a {
+  border-color: #00acc1;
+}
+
+table {
+  width: 100%;
+  padding: 20px;
+  border-collapse: collapse;
+  font-size: 14px;
+
+  th {
+    text-transform: capitalize;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    border: 2px solid #e5ecff;
+  }
+
+  td {
+    text-align: center;
+    font-weight: 600;
+  }
+}
+
+// slick track
+.slick-track {
+  display: flex !important;
+  gap: 20px !important;
+}
+
+.slick-prev,
+.slick-next {
+  opacity: 1 !important;
+
+  width: 30px;
+  height: 30px;
+
+  &::before {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000 !important;
+  }
+}
+
+input[type='radio'] {
+  accent-color: red;
+  width: 18px !important;
+  height: 18px !important;
+}
+
+input {
+  width: 100%;
+}
+
+select {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+}
+
+option {
+  text-transform: capitalize;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white !important;
+}
+
+.PhoneInputInput {
+  outline: none;
+}
