@@ -4,7 +4,6 @@ import { useGetOrdersQuery } from '~/services/order.service'
 
 const ListOrder = () => {
   const { data: orders, refetch } = useGetOrdersQuery({})
-  console.log(orders)
 
   useEffect(() => {
     refetch()
@@ -36,12 +35,33 @@ const ListOrder = () => {
             <thead>
               <tr>
                 <th className='w-[100px]'>no.</th>
+                <th className='w-[100px]'>tài khoản</th>
+                <th className='w-[100px]'>trạng thái</th>
+                <th className='w-[100px]'>ngày đặt vé</th>
+                <th className='w-[100px]'>phương thức thanh toán</th>
+                <th className='w-[100px]'>tổng tiền đơn hàng</th>
               </tr>
             </thead>
             <tbody>
               {currentItems?.map((item, index) => (
                 <tr key={index}>
                   <td>{index + offset}</td>
+                  <td>{item.userId.email}</td>
+                  <td>
+                    {item.isPaid === true ? (
+                      <>đã thanh toán</>
+                    ) : (
+                      <>chưa thanh toán</>
+                    )}
+                  </td>
+                  <td>{new Date(item.createdAt).toLocaleDateString()}</td>
+                  <td>{item.paymentMethod}</td>
+                  <td>
+                    {item.totalPrice.toLocaleString('vi-VN', {
+                      style: 'currency',
+                      currency: 'VND',
+                    })}
+                  </td>
                 </tr>
               ))}
             </tbody>

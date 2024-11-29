@@ -91,6 +91,9 @@ const dashboardPaths = {
     seatStatus: {
       list: '/list-seats-status',
     },
+    orders: {
+      list: '/list-orders',
+    },
 
     showtimes: {
       list: '/list-showtimes',

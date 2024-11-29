@@ -1,16 +1,47 @@
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 
-import { useTotalUserQuery } from '~/services/user.service'
+import {
+  useTotalSystemUsersQuery,
+  useTotalUsersQuery,
+} from '~/services/user.service'
+import { useGetShowtimesQuery } from '~/services/showtime.service'
+import { useTotalCinemaComplexQuery } from '~/services/cinemaComplex.service'
+import { useTotalCinemaQuery } from '~/services/cinema.service'
+import { useCalculateTotalOrderRevenueQuery } from '~/services/revenue.service'
 
 const Dashboard = () => {
   const { user } = useSelector((state) => state.user)
 
-  const { data: totalUsers, refetch: refetchTotalUsers } = useTotalUserQuery()
+  const { data: totalSystemUsers, refetch: refetchTotalSystemUsers } =
+    useTotalSystemUsersQuery()
+  const { data: showtimes, refetch: refetchShowtimes } = useGetShowtimesQuery()
+  const { data: orderRevenue, refetch: refetchOrderRevenue } =
+    useCalculateTotalOrderRevenueQuery()
+  const { data: totalCinamas, refetch: refetchCinemas } = useTotalCinemaQuery()
+  const { data: totalUsers, refetch: refetchTotalUsers } = useTotalUsersQuery()
+  const { data: totalCinemaComplex, refetch: refetchTotalCinemaComplexs } =
+    useTotalCinemaComplexQuery()
+
+  const userShowtimes = showtimes?.data.filter(
+    (showtime) => showtime.cinemaId._id === user.cinemaId,
+  )
 
   useEffect(() => {
+    refetchTotalSystemUsers()
+    refetchShowtimes()
     refetchTotalUsers()
-  }, [refetchTotalUsers])
+    refetchTotalCinemaComplexs()
+    refetchCinemas()
+    refetchOrderRevenue()
+  }, [
+    refetchTotalSystemUsers,
+    refetchShowtimes,
+    refetchTotalUsers,
+    refetchTotalCinemaComplexs,
+    refetchCinemas,
+    refetchOrderRevenue,
+  ])
 
   return (
     <div className='flex'>
@@ -22,27 +53,62 @@ const Dashboard = () => {
         </div>
         <div className='mb-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3'>
           {user.role === 0 && (
-            <div className='rounded-lg bg-white p-6 shadow-lg'>
-              <div className='text-2xl font-semibold text-gray-800'>
-                Total Users
+            <>
+              <div className='rounded-lg bg-white p-6 shadow-custom'>
+                <div className='text-xl font-semibold text-gray-800'>
+                  Tổng số người dùng hệ thống
+                </div>
+                <div className='text-xl font-bold text-blue-600'>
+                  {totalSystemUsers?.data}
+                </div>
               </div>
-              <div className='text-4xl font-bold text-blue-600'>
-                {totalUsers?.data}
+              <div className='rounded-lg bg-white p-6 shadow-custom'>
+                <div className='text-xl font-semibold text-gray-800'>
+                  Tổng số người dùng thường
+                </div>
+                <div className='text-xl font-bold text-blue-600'>
+                  {totalUsers?.data}
+                </div>
               </div>
-            </div>
+              <div className='rounded-lg bg-white p-6 shadow-custom'>
+                <div className='text-xl font-semibold text-gray-800'>
+                  Tổng số cụm rạp
+                </div>
+                <div className='text-xl font-bold text-blue-600'>
+                  {totalCinemaComplex?.data}
+                </div>
+              </div>
+              <div className='rounded-lg bg-white p-6 shadow-custom'>
+                <div className='text-xl font-semibold text-gray-800'>
+                  Tổng số rạp
+                </div>
+                <div className='text-xl font-bold text-blue-600'>
+                  {totalCinamas?.data}
+                </div>
+              </div>
+              <div className='rounded-lg bg-white p-6 shadow-custom'>
+                <div className='text-xl font-semibold text-gray-800'>
+                  Doanh thu khách hàng
+                </div>
+                <div className='text-xl font-bold text-blue-600'>
+                  {orderRevenue?.data.toLocaleString('vi-VN', {
+                    style: 'currency',
+                    currency: 'VND',
+                  })}
+                </div>
+              </div>
+            </>
           )}
           {user.role === 1 && (
-            <div className='rounded-lg bg-white p-6 shadow-lg'>
+            <div className='rounded-lg bg-white p-6 shadow-custom'>
               <div className='text-2xl font-semibold text-gray-800'>
                 Total showtimes
               </div>
-              <div className='text-4xl font-bold text-green-600'></div>
+              <div className='text-xl font-bold text-green-600'>
+                {userShowtimes?.length || 0}
+              </div>
             </div>
           )}
-          <div className='rounded-lg bg-white p-6 shadow-lg'>
-            <div className='text-2xl font-semibold text-gray-800'>Revenue</div>
-            <div className='text-4xl font-bold text-yellow-600'>$12,500</div>
-          </div>
         </div>
       </div>
     </div>

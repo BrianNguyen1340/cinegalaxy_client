@@ -59,6 +59,7 @@ import {
   UpdateSystemAccount,
   ListCashier,
   ListSeatStatus,
+  ListOrder,
 
   // *** MANAGER PAGES
   ListShowtime,
@@ -206,6 +207,12 @@ createRoot(document.getElementById('root')).render(
                 <Route
                   path={paths.dashboardPaths.managements.accounts.update}
                   element={<UpdateAccount />}
+                />
+
+                {/* order */}
+                <Route
+                  path={paths.dashboardPaths.managements.orders.list}
+                  element={<ListOrder />}
                 />
 
                 {/* cinema complex */}

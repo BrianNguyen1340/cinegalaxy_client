@@ -62,10 +62,7 @@ const CreateShowtime = () => {
     try {
       nProgress.start()
       const { roomId, movieId, date, timeStart, promotionId } = reqBody
-      if (!reqBody.promotionId) {
-        Swal.fire('Lỗi!', 'Vui lòng chọn mã khuyến mãi!', 'error')
-        return
-      }
+
       const timeStartDate =
         typeof timeStart === 'string' ? new Date(timeStart) : timeStart
       const currentDate = new Date()
@@ -80,7 +77,7 @@ const CreateShowtime = () => {
         movieId,
         date,
         timeStart: timeStartDate,
-        promotionId,
+        promotionId: promotionId || null,
       }
 
       const response = await createApi(data).unwrap()

@@ -228,7 +228,6 @@ const ShowtimeDetails = () => {
       navigate(`/order/${response?.data?._id}`)
       localStorage.setItem('orderId', response?.data?._id)
     } catch (error) {
-      console.log(error)
       Swal.fire('Thất bại', error?.data?.message, 'error')
     } finally {
       nProgress.done()
@@ -536,7 +535,7 @@ const ShowtimeDetails = () => {
                 </div>
               )}
               <div className='mt-10 flex items-start gap-4 text-white'>
-                <div className='w-[100px]'>Tổng tiền:</div>
+                <div className='w-[100px]'>Tổng tiền sau thuế 10%:</div>
                 <div className='text-xl'>
                   {totalPrice.toLocaleString('vi-VN', {
                     style: 'currency',

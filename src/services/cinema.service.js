@@ -26,6 +26,11 @@ export const cinemaAPISlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    totalCinema: builder.query({
+      query: () => ({
+        url: `/api/v1/cinema/total`,
+      }),
+    }),
   }),
 })
 
@@ -34,4 +39,5 @@ export const {
   useGetCinemasQuery,
   useGetCinemaQuery,
   useUpdateCinemaMutation,
+  useTotalCinemaQuery,
 } = cinemaAPISlice

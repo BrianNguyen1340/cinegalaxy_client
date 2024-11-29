@@ -71,9 +71,14 @@ export const userAPISlice = apiSlice.injectEndpoints({
         url: `/api/v1/user/get-cashiers`,
       }),
     }),
-    totalUser: builder.query({
+    totalSystemUsers: builder.query({
       query: () => ({
-        url: `/api/v1/user/total`,
+        url: `/api/v1/user/total-system-users`,
+      }),
+    }),
+    totalUsers: builder.query({
+      query: () => ({
+        url: `/api/v1/user/total-users`,
       }),
     }),
   }),
@@ -91,5 +96,6 @@ export const {
   useUpdatePasswordMutation,
   useCreateEmployeeMutation,
   useGetCashiersQuery,
-  useTotalUserQuery,
+  useTotalSystemUsersQuery,
+  useTotalUsersQuery,
 } = userAPISlice

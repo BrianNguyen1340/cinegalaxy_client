@@ -63,7 +63,7 @@ const WatchedMovies = () => {
             ))}
           </ul>
         ) : (
-          <p>No orders found.</p>
+          <p>Không có đơn hàng nào!</p>
         )}
       </div>
     </div>

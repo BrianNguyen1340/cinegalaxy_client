@@ -2,12 +2,12 @@ import { apiSlice } from '~/redux/apiSlice'
 
 export const revenueAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    getShowtimeRevenue: builder.query({
-      query: (id) => ({
-        
-      })
+    calculateTotalOrderRevenue: builder.query({
+      query: () => ({
+        url: `/api/v1/revenue/order-revenue`,
+      }),
     }),
   }),
 })
 
-export const { useGetShowtimeRevenueQuery } = revenueAPISlice
+export const { useCalculateTotalOrderRevenueQuery } = revenueAPISlice
