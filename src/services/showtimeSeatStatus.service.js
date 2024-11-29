@@ -11,7 +11,7 @@ export const showtimeSeatStatusAPISlice = apiSlice.injectEndpoints({
     }),
     getAllShowtimeSeatStatus: builder.query({
       query: () => ({
-        url: `/api/v1/showtime-seat-status`,
+        url: `/api/v1/showtime-seat-status/get-all`,
       }),
     }),
   }),

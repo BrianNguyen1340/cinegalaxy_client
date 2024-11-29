@@ -19,7 +19,6 @@ import 'react-phone-number-input/style.css'
 import {
   DashHeader,
   DashLayout,
-  Footer,
   Header,
   MainLayout,
   Sidebar,
@@ -102,7 +101,6 @@ const App = () => {
             <MainLayout />
             <ToastContainer />
           </main>
-          {!hideHeaderFooter && <Footer />}
         </>
       )}
     </>

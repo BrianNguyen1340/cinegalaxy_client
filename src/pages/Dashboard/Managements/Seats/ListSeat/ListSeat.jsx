@@ -1,12 +1,17 @@
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { SquarePen } from 'lucide-react'
+import { SquarePen, Trash } from 'lucide-react'
 import ReactPaginate from 'react-paginate'
 
-import { useGetSeatsQuery } from '~/services/seat.service'
+import {
+  useGetSeatsQuery,
+  useDeleteSeatMutation,
+} from '~/services/seat.service'
 import { useGetCinemasQuery } from '~/services/cinema.service'
 import { useGetRoomsQuery } from '~/services/room.service'
 import useTitle from '~/hooks/useTitle'
+import nProgress from 'nprogress'
+import Swal from 'sweetalert2'
 
 const ListSeat = () => {
   useTitle('Admin | Danh sách ghế')
@@ -17,7 +22,6 @@ const ListSeat = () => {
     isSuccess: isSuccessSeats,
     refetch: refetchSeats,
   } = useGetSeatsQuery({})
-  console.log('seats: ', seats)
 
   const {
     data: cinemas,
@@ -117,6 +121,21 @@ const ListSeat = () => {
     localStorage.setItem('sortBySeatNumber', newSortOrder)
   }
 
+  const [deleteApi] = useDeleteSeatMutation()
+
+  const handleDelete = async (id) => {
+    try {
+      nProgress.start()
+      await deleteApi(id).unwrap()
+
+      refetchSeats()
+    } catch (error) {
+      Swal.fire('Thất bại', error?.data?.message, 'error')
+    } finally {
+      nProgress.done()
+    }
+  }
+
   let content
   if (isLoadingSeats || isLoadingRooms || isLoadingCinemas)
     content = <div>Loading...</div>
@@ -126,6 +145,7 @@ const ListSeat = () => {
         <div className='mb-5 rounded-xl bg-[#289ae7] py-5 text-center text-xl font-semibold capitalize text-white'>
           danh sách ghế
         </div>
+
         <div className='mb-6 flex items-center gap-10'>
           <div>
             <label htmlFor='cinema-select' className='font-semibold'>
@@ -228,6 +248,12 @@ const ListSeat = () => {
                         >
                           <SquarePen />
                         </Link>
+                        <div
+                          onClick={() => handleDelete(item._id)}
+                          className='cursor-pointer rounded p-1 transition duration-300 hover:bg-[#67349D] hover:text-white hover:shadow-custom'
+                        >
+                          <Trash />
+                        </div>
                       </div>
                     </td>
                   </tr>

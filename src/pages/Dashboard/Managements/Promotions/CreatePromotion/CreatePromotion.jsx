@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { HashLoader } from 'react-spinners'
-import { DayPicker } from 'react-day-picker'
 import Swal from 'sweetalert2'
 import nProgress from 'nprogress'
 
@@ -27,19 +26,13 @@ const CreatePromotion = () => {
   const [createApi, { isLoading: isLoadingCreate }] =
     useCreatePromotionMutation()
 
-  const [endDate, setEndDate] = useState()
-  const handleEndDateChange = (date) => {
-    setEndDate(date)
-    setValue('endDate', date, { shouldValidate: true })
-  }
-
   const [promotionType, setPromotionType] = useState('')
 
   const handleCreate = async (reqBody) => {
     try {
       nProgress.start()
-      
-      const { type, value, description, endDate } = reqBody
+
+      const { type, value, description } = reqBody
 
       const response = await createApi({
         createdBy: user._id,
@@ -47,8 +40,6 @@ const CreatePromotion = () => {
         type,
         value,
         description,
-        startDate: new Date(),
-        endDate,
       }).unwrap()
 
       Swal.fire('', response.message, 'success')
@@ -144,26 +135,6 @@ const CreatePromotion = () => {
             name='description'
             className='h-[300px] w-full rounded border-2 p-3 text-base outline-none'
           />
-        </div>
-
-        <div className='mb-5'>
-          <label htmlFor='releaseDate' className='font-semibold capitalize'>
-            Chọn ngày hết hạn
-          </label>
-          <DayPicker
-            {...register('endDate', {
-              required: 'Vui lòng chọn ngày hết hạn',
-            })}
-            id='endDate'
-            mode='single'
-            selected={endDate}
-            onSelect={(date) => handleEndDateChange(date)}
-          />
-          {errors.endDate && (
-            <div className='mt-1 pl-3 text-sm italic text-[red]'>
-              {errors.endDate.message}
-            </div>
-          )}
         </div>
 
         <button

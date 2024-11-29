@@ -1,18 +1,27 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import { LogOut, User } from 'lucide-react'
 import Swal from 'sweetalert2'
 import nProgress from 'nprogress'
 
 import { useLogoutMutation } from '~/services/auth.service'
+import { useGetCinemasQuery } from '~/services/cinema.service'
 import { logout } from '~/redux/reducers/user.reducer'
 import { paths } from '~/utils/paths'
-import { useDispatch, useSelector } from 'react-redux'
 
 const MenuDropdown = () => {
   const { user } = useSelector((state) => state.user)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const { data: cinemas, refetch } = useGetCinemasQuery({})
+
+  const cinema = cinemas?.data?.find((cinema) => cinema._id === user.cinemaId)
+
+  useEffect(() => {
+    refetch()
+  }, [refetch])
 
   const [isOpen, setIsOpen] = useState(false)
   const dropdownRef = useRef(null)
@@ -74,7 +83,12 @@ const MenuDropdown = () => {
         className='relative flex h-full w-fit items-center justify-end gap-2'
         ref={dropdownRef}
       >
-        <div>Xin chào {user?.name}</div>
+        <div className='flex items-center'>
+          <div className='mr-4'>Xin chào {user?.name}</div>
+          <div className='font-semibold capitalize'>
+            {cinema && cinema.name}
+          </div>
+        </div>
         <div className='rounded-full border-[3px] border-[#90e0ef]'>
           <button
             onClick={toggleDropdown}

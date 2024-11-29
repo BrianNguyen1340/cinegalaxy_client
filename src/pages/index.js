@@ -52,6 +52,7 @@ import UpdateGenre from './Dashboard/Managements/Genres/UpdateGenre/UpdateGenre'
 import ListSystemAccount from './Dashboard/Managements/SystemAccounts/ListSystemAccount/ListSystemAccount'
 import CreateSystemAccount from './Dashboard/Managements/SystemAccounts/CreateSystemAccount/CreateSystemAccount'
 import UpdateSystemAccount from './Dashboard/Managements/SystemAccounts/UpdateSystemAccount/UpdateSystemAccount'
+import ListSeatStatus from './Dashboard/Managements/SeatStatus/ListSeatStatus'
 
 // manager
 import ListShowtime from './Dashboard/Managements/Showtimes/ListShowtime/ListShowtime'
@@ -70,6 +71,7 @@ import ListCashier from './Dashboard/Managements/SystemAccounts/ListCashier/List
 import ListPromotion from './Dashboard/Managements/Promotions/ListPromotion/ListPromotion'
 import CreatePromotion from './Dashboard/Managements/Promotions/CreatePromotion/CreatePromotion'
 import UpdatePromotion from './Dashboard/Managements/Promotions/UpdatePromotion/UpdatePromotion'
+import ListOrder from './Dashboard/Managements/Order/ListOrder/ListOrder'
 
 // cashier
 import ListMovieTicket from './Dashboard/Managements/MovieTickets/ListMovieTicket/ListMovieTicket'
@@ -139,6 +141,7 @@ export {
   ListSystemAccount,
   CreateSystemAccount,
   UpdateSystemAccount,
+  ListSeatStatus,
 
   // manager
   ListShowtime,
@@ -157,6 +160,7 @@ export {
   ListPromotion,
   CreatePromotion,
   UpdatePromotion,
+  ListOrder,
 
   // cashier
   ListMovieTicket,

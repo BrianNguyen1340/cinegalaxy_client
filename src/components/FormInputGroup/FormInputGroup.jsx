@@ -40,9 +40,9 @@ const FormInputGroup = ({
         />
         {children}
       </div>
-      <span className='absolute top-[100%] pl-3 pt-[2px] text-sm italic text-[red]'>
+      <div className='absolute top-[100%] w-full pl-3 pt-[2px] text-sm italic text-[red]'>
         {errorMessage && String(errorMessage)}
-      </span>
+      </div>
     </div>
   )
 }

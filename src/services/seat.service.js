@@ -26,6 +26,12 @@ export const seatAPISlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    deleteSeat: builder.mutation({
+      query: (id) => ({
+        url: `/api/v1/seat/delete/${id}`,
+        method: 'DELETE',
+      }),
+    }),
   }),
 })
 
@@ -34,4 +40,5 @@ export const {
   useGetSeatQuery,
   useGetSeatsQuery,
   useUpdateSeatMutation,
+  useDeleteSeatMutation,
 } = seatAPISlice

@@ -88,6 +88,9 @@ const dashboardPaths = {
       update: '/update-seat/:id',
       delete: '/delete-seat/:id',
     },
+    seatStatus: {
+      list: '/list-seats-status',
+    },
 
     showtimes: {
       list: '/list-showtimes',

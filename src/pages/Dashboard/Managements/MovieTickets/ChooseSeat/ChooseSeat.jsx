@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { BeatLoader } from 'react-spinners'
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 import nProgress from 'nprogress'
 
@@ -139,7 +138,6 @@ const ChooseSeat = () => {
         totalPrice,
         cashReceived,
       }
-      console.log(checkoutData)
 
       localStorage.setItem('totalPrice', totalPrice)
       localStorage.setItem('showtimeId', showtime?.data?._id)
@@ -161,7 +159,6 @@ const ChooseSeat = () => {
       navigate(`/payment/${response?.data?._id}`)
       localStorage.setItem('paymentId', response?.data?._id)
     } catch (error) {
-      console.log(error)
       Swal.fire('Thất bại', error?.data?.message, 'error')
     } finally {
       nProgress.done()
@@ -421,30 +418,6 @@ const ChooseSeat = () => {
         >
           Tạo vé
         </button>
-        <div className='h-fit w-full bg-[#cdc197]'>
-          <div className='mx-auto flex w-[1000px] items-center justify-between p-6'>
-            <Link to={paths.userPaths.showtimes} className='flex items-center'>
-              <div className='mr-2 flex items-center justify-center'>
-                <FaArrowLeft />
-              </div>
-              <div className='font-semibold'>Trở lại</div>
-            </Link>
-            <div className='cursor-pointer'>
-              <div className='flex items-center'>
-                <div className='mr-2 flex items-center justify-center'>
-                  <FaArrowRight />
-                </div>
-                <button
-                  type='button'
-                  onClick={handleProceedToCheckout}
-                  className='font-semibold'
-                >
-                  Tiếp tục
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </form>
     )
   }

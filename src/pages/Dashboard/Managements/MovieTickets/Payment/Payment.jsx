@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import Swal from 'sweetalert2'
@@ -31,15 +31,6 @@ const Payment = () => {
 
   const { data: movieTicket, refetch } = useGetMovieTicketQuery(id)
   console.log(movieTicket)
-  const [totalSeatPrice, setTotalSeatPrice] = useState(0)
-
-  useEffect(() => {
-    const total = movieTicket?.data?.seats?.reduce((total) => {
-      const seatPrice = 100000
-      return total + seatPrice
-    }, 0)
-    setTotalSeatPrice(total)
-  }, [movieTicket])
 
   useEffect(() => {
     refetch()
@@ -65,10 +56,10 @@ const Payment = () => {
 
       await createStatusSeat(seatsData)
 
-      Swal.fire('', 'Thanh toán thành công!', 'success')
+      Swal.fire('', 'Xác nhận chọn ghế thành công!', 'success')
       navigate(paths.dashboardPaths.managements.movieTickets.create)
     } catch (error) {
-      console.log(error)
+      Swal.fire('Thất bại', error?.data?.message, 'error')
     }
   }
 
@@ -135,10 +126,10 @@ const Payment = () => {
                 </div>
               </div>
               <div className='flex min-w-[100px] items-center justify-center text-xl font-semibold'>
-                {totalSeatPrice?.toLocaleString('vi-VN', {
+                {/* {totalSeatPrice?.toLocaleString('vi-VN', {
                   style: 'currency',
                   currency: 'VND',
-                })}
+                })} */}
               </div>
             </div>
             {movieTicket?.data?.products?.map((product, index) => (

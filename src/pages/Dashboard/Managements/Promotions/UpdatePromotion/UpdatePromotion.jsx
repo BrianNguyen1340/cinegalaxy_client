@@ -3,7 +3,6 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { HashLoader } from 'react-spinners'
-import { DayPicker } from 'react-day-picker'
 import Swal from 'sweetalert2'
 import nProgress from 'nprogress'
 
@@ -31,19 +30,12 @@ const UpdatePromotion = () => {
 
   const { data: promotion, refetch } = useGetPromotionQuery(id)
 
-  const [endDate, setEndDate] = useState()
-  const handleEndDateChange = (date) => {
-    setEndDate(date)
-    setValue('endDate', date, { shouldValidate: true })
-  }
-
   useEffect(() => {
     if (promotion?.data) {
       setValue('type', promotion?.data?.type)
       setValue('value', promotion?.data?.value)
       setValue('endDate', promotion?.data?.endDate)
       setValue('description', promotion?.data?.description)
-      setEndDate(promotion?.data?.endDate)
     }
   }, [promotion, setValue])
 
@@ -57,7 +49,7 @@ const UpdatePromotion = () => {
     try {
       nProgress.start()
 
-      const { type, value, description, endDate } = reqBody
+      const { type, value, description } = reqBody
 
       const response = await updateApi({
         createdBy: user._id,
@@ -65,8 +57,6 @@ const UpdatePromotion = () => {
         type,
         value,
         description,
-        startDate: new Date(),
-        endDate,
       }).unwrap()
 
       Swal.fire('', response.message, 'success')
@@ -162,26 +152,6 @@ const UpdatePromotion = () => {
             name='description'
             className='h-[300px] w-full rounded border-2 p-3 text-base outline-none'
           />
-        </div>
-
-        <div className='mb-5'>
-          <label htmlFor='releaseDate' className='font-semibold capitalize'>
-            Chọn ngày hết hạn
-          </label>
-          <DayPicker
-            {...register('endDate', {
-              required: 'Vui lòng chọn ngày hết hạn',
-            })}
-            id='endDate'
-            mode='single'
-            selected={endDate}
-            onSelect={(date) => handleEndDateChange(date)}
-          />
-          {errors.endDate && (
-            <div className='mt-1 pl-3 text-sm italic text-[red]'>
-              {errors.endDate.message}
-            </div>
-          )}
         </div>
 
         <button

@@ -20,7 +20,6 @@ import useTitle from '~/hooks/useTitle'
 const ListShowtime = () => {
   useTitle('Manager | Danh sách suất chiếu')
   const { user } = useSelector((state) => state.user)
-  console.log(user?.cinemaId)
 
   const {
     data: showtimes,

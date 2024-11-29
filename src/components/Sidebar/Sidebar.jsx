@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GiFilmProjector } from 'react-icons/gi'
@@ -304,6 +303,13 @@ const Sidebar = ({ openSidebar, setOpenSidebar, style }) => {
                       <SidebarMenuItem
                         path={paths.dashboardPaths.managements.seats.create}
                         spanText='tạo ghế'
+                        spanTitle='C'
+                        isSelected={selectedMenuItem === location.pathname}
+                        onSelect={() => setSelectedMenuItem(location.pathname)}
+                      />
+                      <SidebarMenuItem
+                        path={paths.dashboardPaths.managements.seatStatus.list}
+                        spanText='trạng thái ghế'
                         spanTitle='C'
                         isSelected={selectedMenuItem === location.pathname}
                         onSelect={() => setSelectedMenuItem(location.pathname)}

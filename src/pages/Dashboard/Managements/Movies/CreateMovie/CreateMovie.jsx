@@ -56,7 +56,6 @@ const CreateMovie = () => {
 
   const [poster, setPoster] = useState(null)
   const [posterURL, setPosterURL] = useState(null)
-  console.log(posterURL)
   const [uploadPosterApi] = useUploadPosterMovieMutation()
   const handleUploadPoster = async (event) => {
     try {
@@ -104,7 +103,6 @@ const CreateMovie = () => {
         name,
         description,
         director,
-        releaseDate,
         duration,
         trailerURL,
         ageRating,
@@ -112,7 +110,17 @@ const CreateMovie = () => {
         movieFormat,
       } = reqBody
 
-      const response = await createApi({
+      const currentDate = new Date()
+      if (new Date(releaseDate) < currentDate) {
+        Swal.fire(
+          '',
+          'Ngày phát hành không được nhỏ hơn ngày hiện tại!',
+          'error',
+        )
+        return
+      }
+
+      const data = {
         name,
         description,
         director,
@@ -125,7 +133,9 @@ const CreateMovie = () => {
         genreIds: selectedGenres.map((genre) => genre.value),
         posterURL,
         bannerURL,
-      }).unwrap()
+      }
+
+      const response = await createApi(data).unwrap()
 
       Swal.fire('Thành công', response.message, 'success')
       navigate(paths.dashboardPaths.managements.movies.list)

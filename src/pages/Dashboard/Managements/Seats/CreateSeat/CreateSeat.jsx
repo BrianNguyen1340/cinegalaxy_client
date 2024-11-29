@@ -91,6 +91,11 @@ const CreateSeat = () => {
               <option value='I'>I</option>
               <option value='J'>J</option>
             </select>
+            {errors.row && (
+              <div className='pl-3 text-sm italic text-[red]'>
+                {errors.row.message}
+              </div>
+            )}
           </div>
 
           <FormInputGroup
@@ -109,7 +114,7 @@ const CreateSeat = () => {
           />
 
           <div className='mb-5 flex flex-col'>
-            <label htmlFor='subtitle' className='mb-1 font-semibold capitalize'>
+            <label htmlFor='type' className='mb-1 font-semibold capitalize'>
               loại ghế
             </label>
             <select
@@ -126,6 +131,11 @@ const CreateSeat = () => {
               <option value='Kid'>Kid</option>
               <option value='Couple'>Couple</option>
             </select>
+            {errors.type && (
+              <div className='pl-3 text-sm italic text-[red]'>
+                {errors.type.message}
+              </div>
+            )}
           </div>
 
           <FormInputGroup

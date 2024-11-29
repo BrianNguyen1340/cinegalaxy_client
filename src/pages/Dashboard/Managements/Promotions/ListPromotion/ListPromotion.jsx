@@ -45,8 +45,6 @@ const ListPromotion = () => {
                 <th>nguời tạo</th>
                 <th>loại khuyến mãi</th>
                 <th>giá trị khuyến mãi</th>
-                <th>ngày tạo</th>
-                <th>ngày hết hạn</th>
                 <th>hành động</th>
               </tr>
             </thead>
@@ -67,8 +65,6 @@ const ListPromotion = () => {
                       })}
                     </td>
                   )}
-                  <td>{new Date(item.startDate).toLocaleDateString()}</td>
-                  <td>{new Date(item.endDate).toLocaleDateString()}</td>
                   <td>
                     <div className='flex items-center justify-center'>
                       <Link

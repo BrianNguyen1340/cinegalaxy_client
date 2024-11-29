@@ -141,7 +141,6 @@ const UpdateMovie = () => {
         name,
         description,
         director,
-        releaseDate,
         duration,
         trailerURL,
         ageRating,
@@ -149,7 +148,17 @@ const UpdateMovie = () => {
         movieFormat,
       } = reqBody
 
-      const response = await updateApi({
+      const currentDate = new Date()
+      if (new Date(releaseDate) < currentDate) {
+        Swal.fire(
+          '',
+          'Ngày phát hành không được nhỏ hơn ngày hiện tại!',
+          'error',
+        )
+        return
+      }
+
+      const data = {
         id,
         name,
         description,
@@ -163,7 +172,9 @@ const UpdateMovie = () => {
         genres: selectedGenres.map((genre) => genre.value),
         posterURL,
         bannerURL,
-      }).unwrap()
+      }
+
+      const response = await updateApi(data).unwrap()
 
       Swal.fire('Thành công', response.message, 'success')
       navigate(paths.dashboardPaths.managements.movies.list)

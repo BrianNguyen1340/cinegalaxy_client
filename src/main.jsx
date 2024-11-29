@@ -58,6 +58,7 @@ import {
   CreateSystemAccount,
   UpdateSystemAccount,
   ListCashier,
+  ListSeatStatus,
 
   // *** MANAGER PAGES
   ListShowtime,
@@ -289,6 +290,10 @@ createRoot(document.getElementById('root')).render(
                 <Route
                   path={paths.dashboardPaths.managements.seats.update}
                   element={<UpdateSeat />}
+                />
+                <Route
+                  path={paths.dashboardPaths.managements.seatStatus.list}
+                  element={<ListSeatStatus />}
                 />
 
                 {/* showtime */}

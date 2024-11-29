@@ -62,16 +62,28 @@ const CreateShowtime = () => {
     try {
       nProgress.start()
       const { roomId, movieId, date, timeStart, promotionId } = reqBody
-
-      const response = await createApi({
+      if (!reqBody.promotionId) {
+        Swal.fire('Lỗi!', 'Vui lòng chọn mã khuyến mãi!', 'error')
+        return
+      }
+      const timeStartDate =
+        typeof timeStart === 'string' ? new Date(timeStart) : timeStart
+      const currentDate = new Date()
+      if (new Date(date) < currentDate) {
+        Swal.fire('', 'Ngày chiếu không được nhỏ hơn ngày hiện tại!', 'error')
+        return
+      }
+      const data = {
+        createdBy: user._id,
         cinemaId: user?.cinemaId,
         roomId,
         movieId,
         date,
-        timeStart,
+        timeStart: timeStartDate,
         promotionId,
-      }).unwrap()
+      }
 
+      const response = await createApi(data).unwrap()
       Swal.fire('Thành công!', response.message, 'success')
       setSelectedDate('')
       setSelectedTimeStart('')
@@ -91,11 +103,37 @@ const CreateShowtime = () => {
         <div className='mb-5 rounded-xl bg-[#289ae7] py-5 text-center text-xl font-semibold capitalize text-white'>
           tạo suất chiếu
         </div>
-
         <form
           onSubmit={handleSubmit(handleCreate)}
           className='mx-auto w-[500px]'
         >
+          <div className='mb-5 flex flex-col'>
+            <label
+              htmlFor='promotionId'
+              className='mb-1 font-semibold capitalize'
+            >
+              mã khuyến mãi
+            </label>
+            <select
+              id='promotionId'
+              name='promotionId'
+              className='p-2 capitalize'
+              {...register('promotionId')}
+            >
+              <option value=''>Chọn mã khuyến mãi</option>
+              {promotions?.data?.map((item, index) => (
+                <option key={index} value={item._id}>
+                  {item.name} -{' '}
+                  {item.type === 'percentage'
+                    ? `${item.value}%`
+                    : item.type === 'fixed'
+                      ? `${item.value}đ`
+                      : ''}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div className='mb-5 flex flex-col'>
             <label htmlFor='roomId' className='mb-1 font-semibold capitalize'>
               phòng
@@ -200,27 +238,6 @@ const CreateShowtime = () => {
                 {errors.timeStart.message}
               </div>
             )}
-          </div>
-
-          <div className='mb-5 flex flex-col'>
-            <label
-              htmlFor='promotionId'
-              className='mb-1 font-semibold capitalize'
-            >
-              mã khuyến mãi
-            </label>
-            <select
-              id='promotionId'
-              name='promotionId'
-              className='p-2 capitalize'
-            >
-              <option value=''>Chọn mã khuyến mãi</option>
-              {promotions?.data?.map((item, index) => (
-                <option key={index} value={item._id}>
-                  {item?.name}
-                </option>
-              ))}
-            </select>
           </div>
 
           <button

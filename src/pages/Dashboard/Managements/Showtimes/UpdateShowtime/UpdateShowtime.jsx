@@ -13,7 +13,6 @@ import {
   useUpdateShowtimeMutation,
   useGetShowtimeQuery,
 } from '~/services/showtime.service'
-import { useGetPromotionsQuery } from '~/services/promotion.service'
 import { paths } from '~/utils/paths'
 import useTitle from '~/hooks/useTitle'
 
@@ -52,7 +51,6 @@ const UpdateShowtime = () => {
     refetch: refetchRooms,
   } = useGetRoomsQuery({})
 
-  const { data: promotions, refetch } = useGetPromotionsQuery({})
 
   const filteredRooms =
     rooms?.data?.filter((room) => room.cinemaId._id === user?.cinemaId) || []
@@ -64,8 +62,7 @@ const UpdateShowtime = () => {
     refetchShowtime()
     refetchMovies()
     refetchRooms()
-    refetch()
-  }, [refetchShowtime, refetchMovies, refetchRooms, refetch])
+  }, [refetchShowtime, refetchMovies, refetchRooms])
 
   useEffect(() => {
     if (showtime?.data) {
@@ -93,6 +90,13 @@ const UpdateShowtime = () => {
 
       const timeStartDate =
         typeof timeStart === 'string' ? new Date(timeStart) : timeStart
+
+      const currentDate = new Date()
+
+      if (new Date(date) < currentDate) {
+        Swal.fire('', 'Ngày chiếu không được nhỏ hơn ngày hiện tại!', 'error')
+        return
+      }
 
       const response = await updateApi({
         id,
@@ -227,30 +231,6 @@ const UpdateShowtime = () => {
                 {errors.timeStart.message}
               </div>
             )}
-          </div>
-
-          <div className='mb-5 flex flex-col'>
-            <label
-              htmlFor='promotionId'
-              className='mb-1 font-semibold capitalize'
-            >
-              mã khuyến mãi
-            </label>
-            <select
-              {...register('promotionId', {
-                required: 'Vui lòng chọn rạp',
-              })}
-              id='promotionId'
-              name='promotionId'
-              className='p-2 capitalize'
-            >
-              <option value=''>Chọn mã khuyến mãi</option>
-              {promotions?.data?.map((item, index) => (
-                <option key={index} value={item._id}>
-                  {item?.name}
-                </option>
-              ))}
-            </select>
           </div>
 
           <button

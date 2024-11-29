@@ -108,10 +108,9 @@ const Order = () => {
           createStatusSeat(seatsData),
         ])
 
-        Swal.fire('', 'Thanh toán thành công!', 'success')
         navigate(paths.userPaths.orderSuccess)
       } catch (error) {
-        console.log(error)
+        Swal.fire('', error.message, 'error')
       }
     })
   }
@@ -120,7 +119,8 @@ const Order = () => {
     const price = localStorage.getItem('totalPrice')
     const totalPrice = parseFloat(price).toFixed(2)
     if (isNaN(totalPrice) || totalPrice <= 0) {
-      console.error('Invalid total price')
+      Swal.fire('', 'Invalid total price', 'error')
+
       return
     }
     return actions.order
@@ -138,7 +138,7 @@ const Order = () => {
         return orderId
       })
       .catch((error) => {
-        console.error('Error during order creation:', error)
+        Swal.fire('', error.message, 'error')
       })
   }
 
