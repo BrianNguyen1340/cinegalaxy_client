@@ -1,22 +1,23 @@
 import { apiSlice } from '~/redux/apiSlice'
+import { API_ROOT } from '~/utils/constants'
 
 export const serviceTicketAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createServiceTicket: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/service-ticket/create`,
+        url: `${API_ROOT}/api/v1/service-ticket/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getServiceTickets: builder.query({
       query: () => ({
-        url: `/api/v1/service-ticket`,
+        url: `${API_ROOT}/api/v1/service-ticket`,
       }),
     }),
     getServiceTicket: builder.query({
       query: (id) => ({
-        url: `/api/v1/service-ticket/${id}`,
+        url: `${API_ROOT}/api/v1/service-ticket/${id}`,
       }),
     }),
   }),

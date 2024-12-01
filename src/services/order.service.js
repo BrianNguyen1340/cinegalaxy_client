@@ -1,34 +1,35 @@
 import { apiSlice } from '~/redux/apiSlice'
+import { API_ROOT } from '~/utils/constants'
 
 export const orderAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createOrder: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/order/create`,
+        url: `${API_ROOT}/api/v1/order/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getOrder: builder.query({
       query: (id) => ({
-        url: `/api/v1/order/${id}`,
+        url: `${API_ROOT}/api/v1/order/${id}`,
       }),
     }),
     makeOrderAsPaid: builder.mutation({
       query: ({ id, details }) => ({
-        url: `/api/v1/order/${id}/pay`,
+        url: `${API_ROOT}/api/v1/order/${id}/pay`,
         method: 'PUT',
         body: details,
       }),
     }),
     getPaypalClientId: builder.query({
       query: () => ({
-        url: `/api/v1/config/paypal`,
+        url: `${API_ROOT}/api/v1/config/paypal`,
       }),
     }),
     getOrders: builder.query({
       query: () => ({
-        url: `/api/v1/order/get-all`,
+        url: `${API_ROOT}/api/v1/order/get-all`,
       }),
     }),
   }),

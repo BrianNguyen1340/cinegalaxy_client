@@ -1,34 +1,35 @@
 import { apiSlice } from '~/redux/apiSlice'
+import { API_ROOT } from '~/utils/constants'
 
 export const cinemaComplexAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCinemaComplex: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/cinema-complex/create`,
+        url: `${API_ROOT}/api/v1/cinema-complex/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getCinemaComplex: builder.query({
       query: (id) => ({
-        url: `/api/v1/cinema-complex/get/${id}`,
+        url: `${API_ROOT}/api/v1/cinema-complex/get/${id}`,
       }),
     }),
     getCinemaComplexes: builder.query({
       query: () => ({
-        url: `/api/v1/cinema-complex/get-all`,
+        url: `${API_ROOT}/api/v1/cinema-complex/get-all`,
       }),
     }),
     updateCinemaComplex: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/cinema-complex/update/${data.id}`,
+        url: `${API_ROOT}/api/v1/cinema-complex/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     totalCinemaComplex: builder.query({
       query: () => ({
-        url: `/api/v1/cinema-complex/total`,
+        url: `${API_ROOT}/api/v1/cinema-complex/total`,
       }),
     }),
   }),

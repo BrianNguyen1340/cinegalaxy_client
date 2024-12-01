@@ -7,10 +7,6 @@ export default defineConfig({
     alias: [{ find: '~', replacement: '/src' }],
   },
   server: {
-    proxy: {
-      '/api/v1/': 'https://cinegalaxy-server.onrender.com',
-      '/uploads/': 'https://cinegalaxy-server.onrender.com',
-    },
     port: 3000,
   },
 })

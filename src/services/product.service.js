@@ -1,34 +1,35 @@
 import { apiSlice } from '~/redux/apiSlice'
+import { API_ROOT } from '~/utils/constants'
 
 export const productAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createProduct: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/product/create`,
+        url: `${API_ROOT}/api/v1/product/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getProduct: builder.query({
       query: (id) => ({
-        url: `/api/v1/product/get/${id}`,
+        url: `${API_ROOT}/api/v1/product/get/${id}`,
       }),
     }),
     getProducts: builder.query({
       query: () => ({
-        url: `/api/v1/product/get-all`,
+        url: `${API_ROOT}/api/v1/product/get-all`,
       }),
     }),
     updateProduct: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/product/update/${data.id}`,
+        url: `${API_ROOT}/api/v1/product/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     uploadProduct: builder.mutation({
       query: (data) => ({
-        url: `/api/v1/upload/product`,
+        url: `${API_ROOT}/api/v1/upload/product`,
         method: 'POST',
         body: data,
       }),
