@@ -30,14 +30,22 @@ const MainNavigation = () => {
             phim
           </Link>
         </li>
-        {/* <li className='relative flex items-center'>
+        <li className='relative flex items-center'>
           <Link
             to={paths.userPaths.cinemas}
             className='relative pb-[2px] capitalize after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-500 hover:after:w-full'
           >
             rạp chiếu phim
           </Link>
-        </li> */}
+        </li>
+        <li className='relative flex items-center'>
+          <Link
+            to={paths.userPaths.about}
+            className='relative pb-[2px] capitalize after:absolute after:bottom-[-3px] after:left-0 after:h-[2px] after:w-0 after:bg-red-500 after:transition-all after:duration-500 hover:after:w-full'
+          >
+            về chúng tôi
+          </Link>
+        </li>
         {/* <li className='relative flex items-center'>
           <Link
             to={paths.userPaths.promotions}

@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { HashLoader } from 'react-spinners'
@@ -21,12 +20,9 @@ const CreatePromotion = () => {
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm()
   const [createApi, { isLoading: isLoadingCreate }] =
     useCreatePromotionMutation()
-
-  const [promotionType, setPromotionType] = useState('')
 
   const handleCreate = async (reqBody) => {
     try {
@@ -36,6 +32,7 @@ const CreatePromotion = () => {
 
       const response = await createApi({
         createdBy: user._id,
+        cinemaId: user.cinemaId,
         name: randomString(10),
         type,
         value,
@@ -49,12 +46,6 @@ const CreatePromotion = () => {
     } finally {
       nProgress.done()
     }
-  }
-
-  const handlePromotionTypeChange = (e) => {
-    const selectedType = e.target.value
-    setPromotionType(selectedType)
-    setValue('value', '')
   }
 
   return (
@@ -76,8 +67,8 @@ const CreatePromotion = () => {
             {...register('type', {
               required: 'Vui lòng chọn loại khuyến mãi!',
             })}
-            onChange={handlePromotionTypeChange}
             className='block w-full rounded border px-3 py-2 shadow-sm focus:outline-none focus:ring-1 focus:ring-blue-500'
+            name='type'
           >
             <option value=''>Chọn loại</option>
             <option value='percentage'>Giảm theo phần trăm</option>
@@ -87,41 +78,20 @@ const CreatePromotion = () => {
             <p className='mt-1 text-sm text-red-600'>{errors.type.message}</p>
           )}
         </div>
-        {promotionType && (
-          <div className='mb-4'>
-            <FormInputGroup
-              register={register}
-              errors={errors}
-              validation={{
-                required: 'Vui lòng nhập giá trị!',
-                pattern: {
-                  value:
-                    promotionType === 'percentage'
-                      ? /^[1-9][0-9]?$|^100$/
-                      : /^[1-9][0-9]*$/,
-                  message:
-                    promotionType === 'percentage'
-                      ? 'Vui lòng nhập giá trị từ 1 đến 100!'
-                      : 'Vui lòng nhập giá trị lớn hơn 0!',
-                },
-              }}
-              labelChildren={
-                promotionType === 'percentage'
-                  ? 'Giá trị (%)'
-                  : 'Giá trị giảm (VNĐ)'
-              }
-              htmlFor='value'
-              id='value'
-              placeholder={
-                promotionType === 'percentage'
-                  ? 'Nhập giá trị từ 1 đến 100'
-                  : 'Nhập số tiền giảm'
-              }
-              type='number'
-              name='value'
-            />
-          </div>
-        )}
+
+        <FormInputGroup
+          register={register}
+          errors={errors}
+          validation={{
+            required: 'Vui lòng nhập giá trị!',
+          }}
+          labelChildren='giá trị'
+          htmlFor='value'
+          id='value'
+          placeholder='Nhập giá trị giảm'
+          type='number'
+          name='value'
+        />
 
         <div className='mb-5'>
           <label

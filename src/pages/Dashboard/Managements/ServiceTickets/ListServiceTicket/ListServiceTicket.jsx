@@ -75,7 +75,9 @@ const ListServiceTicket = () => {
                     <ul>
                       {item.products.map((product, index) => (
                         <li key={index} className='flex justify-between'>
-                          <span className='capitalize'>{product.name}</span>
+                          <span className='text-start capitalize'>
+                            {product.name}
+                          </span>
                           <span>
                             {product.total.toLocaleString('vi-VN', {
                               style: 'currency',

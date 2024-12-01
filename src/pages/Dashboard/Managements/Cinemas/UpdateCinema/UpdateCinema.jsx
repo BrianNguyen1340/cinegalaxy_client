@@ -43,6 +43,9 @@ const UpdateCinema = () => {
   useEffect(() => {
     if (cinema?.data) {
       setValue('name', cinema?.data?.name)
+      setValue('phone', cinema?.data?.phone)
+      setValue('address', cinema?.data?.address)
+      setValue('phone', cinema?.data?.phone)
       setValue('cinemaComplexId', cinema?.data?.cinemaComplexId?._id)
     }
   }, [cinema, setValue])
@@ -56,11 +59,13 @@ const UpdateCinema = () => {
 
   const handleUpdate = async (reqBody) => {
     try {
-      const { name, cinemaComplexId } = reqBody
+      const { name, address, cinemaComplexId } = reqBody
 
       const response = await updateApi({
         id,
         name,
+        address,
+        phone: '0123456789',
         cinemaComplexId,
       }).unwrap()
 
@@ -102,6 +107,20 @@ const UpdateCinema = () => {
             type='text'
             id='name'
             name='name'
+          />
+
+          <FormInputGroup
+            register={register}
+            errors={errors}
+            validation={{
+              required: 'Vui lòng nhập địa chỉ rạp!',
+            }}
+            labelChildren='địa chỉ rạp'
+            htmlFor='address'
+            id='address'
+            placeholder='Vui lòng nhập địa chỉ rạp'
+            type='text'
+            name='address'
           />
 
           <div className='mb-5 flex flex-col'>

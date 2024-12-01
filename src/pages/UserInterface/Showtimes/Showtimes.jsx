@@ -222,29 +222,29 @@ const Showtimes = () => {
                             : ''
                         } flex cursor-pointer items-center gap-2 border border-[#eee] p-2 text-sm font-semibold`}
                       >
-                        {item.movieRating === 'P - Phổ biến' && (
+                        {item.ageRating === 'P - Phổ biến' && (
                           <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#088210] p-2 text-white'>
                             P
                           </div>
                         )}
-                        {item.movieRating === 'K - Dành cho trẻ em' && (
-                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
+                        {item.ageRating === 'K - Dành cho trẻ em' && (
+                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#ffa904] p-2 text-white'>
                             K
                           </div>
                         )}
-                        {item.movieRating ===
+                        {item.ageRating ===
                           'C13 - Cấm khán giả dưới 13 tuổi' && (
-                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
+                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#246ed8] p-2 text-white'>
                             13
                           </div>
                         )}
-                        {item.movieRating ===
+                        {item.ageRating ===
                           'C16 - Cấm khán giả dưới 16 tuổi' && (
-                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
+                          <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#c60672] p-2 text-white'>
                             16
                           </div>
                         )}
-                        {item.movieRating ===
+                        {item.ageRating ===
                           'C18 - Cấm khán giả dưới 18 tuổi' && (
                           <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#e80808] p-2 text-white'>
                             18

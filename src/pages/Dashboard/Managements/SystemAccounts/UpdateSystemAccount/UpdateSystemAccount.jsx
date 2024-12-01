@@ -5,7 +5,10 @@ import { BeatLoader, HashLoader } from 'react-spinners'
 import nProgress from 'nprogress'
 import Swal from 'sweetalert2'
 
-import { useGetUserQuery, useUpdateUserMutation } from '~/services/user.service'
+import {
+  useGetUserQuery,
+  useUpdateEmployeeMutation,
+} from '~/services/user.service'
 import { useGetCinemasQuery } from '~/services/cinema.service'
 import { paths } from '~/utils/paths'
 import { FormInputGroup } from '~/components'
@@ -29,7 +32,6 @@ const UpdateSystemAccount = () => {
     isSuccess: isSuccessUser,
     refetch: refetchUser,
   } = useGetUserQuery(id)
-  console.log(user)
 
   const { data: cinemas, refetch: refetchCinemas } = useGetCinemasQuery({})
 
@@ -47,17 +49,18 @@ const UpdateSystemAccount = () => {
     refetchCinemas()
   }, [refetchUser, refetchCinemas])
 
-  const [updateApi, { isLoading: isLoadingUpdate }] = useUpdateUserMutation()
+  const [updateApi, { isLoading: isLoadingUpdate }] =
+    useUpdateEmployeeMutation()
 
   const handleUpdate = async (reqBody) => {
     try {
       nProgress.start()
-      const { email, name } = reqBody
+      const { email, name, cinemaId } = reqBody
 
-      const response = await updateApi({ id, email, name }).unwrap()
+      const response = await updateApi({ id, email, name, cinemaId }).unwrap()
 
       Swal.fire('Thành công', response.message, 'success')
-      navigate(paths.dashboardPaths.managements.accounts.list)
+      navigate(paths.dashboardPaths.managements.systemAccounts.list)
     } catch (error) {
       Swal.fire('Thất bại', error?.data?.message, 'error')
     } finally {

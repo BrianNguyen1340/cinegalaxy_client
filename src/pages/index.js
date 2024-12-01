@@ -15,6 +15,8 @@ import NotFound from './NotFound/NotFound'
 import Order from './UserInterface/Order/Order'
 import OrderSuccess from './UserInterface/OrderSuccess/OrderSuccess'
 import OrderCancel from './UserInterface/OderCancel/OrderCancel'
+import Cinemas from './UserInterface/Cinemas/Cinemas'
+import About from './UserInterface/About/About'
 
 // private auth
 import PrivateLogin from './Dashboard/PrivateAuth/PrivateLogin/PrivateLogin'
@@ -106,6 +108,8 @@ export {
   WatchedMovies,
   OrderSuccess,
   OrderCancel,
+  Cinemas,
+  About,
 
   // private auth
   PrivateLogin,

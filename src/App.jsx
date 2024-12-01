@@ -22,6 +22,7 @@ import {
   Header,
   MainLayout,
   Sidebar,
+  Footer,
 } from '~/components'
 import { paths } from '~/utils/paths'
 import { NotFound } from '~/pages'
@@ -101,6 +102,7 @@ const App = () => {
             <MainLayout />
             <ToastContainer />
           </main>
+          {!hideHeaderFooter && <Footer />}
         </>
       )}
     </>

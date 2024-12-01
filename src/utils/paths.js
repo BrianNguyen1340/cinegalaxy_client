@@ -15,6 +15,7 @@ const userPaths = {
   showtimes: '/showtimes',
   support: '/support',
   showtimeDetails: '/showtime/:id',
+  about: '/about',
 
   profile: '/profile',
   payments: '/payments',

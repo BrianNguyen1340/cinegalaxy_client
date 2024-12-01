@@ -27,7 +27,7 @@ const WatchedMovies = () => {
       <div className='mx-auto w-[1000px] py-10'>
         <div className='mb-6 text-center text-3xl font-semibold'>Vé đã đặt</div>
         {userPaidOrders?.length > 0 ? (
-          <ul className='grid grid-cols-3 gap-3'>
+          <ul className='grid grid-cols-3 gap-6 text-center'>
             {userPaidOrders.map((order) => (
               <li key={order._id} className='rounded-xl p-2 shadow-custom'>
                 <p>Movie: {order.showtimeId.movieId.name}</p>
@@ -37,20 +37,26 @@ const WatchedMovies = () => {
                   {new Date(order.showtimeId.timeStart).toLocaleTimeString()}~
                   {new Date(order.showtimeId.timeEnd).toLocaleTimeString()}
                 </p>
-                <p className='flex items-center gap-2'>
-                  Ghế đã mua:
-                  {order.seats.map((seat) => (
-                    <div key={seat._id}>
-                      {seat.number}
-                      {seat.row}
-                    </div>
-                  ))}
+                <p className='flex flex-col items-center gap-2'>
+                  <div>Ghế đã mua:</div>
+                  <div className='flex items-center gap-2'>
+                    {order.seats.map((seat) => (
+                      <div key={seat._id}>
+                        {seat.number}
+                        {seat.row}
+                      </div>
+                    ))}
+                  </div>
                 </p>
-                <p className='flex items-center gap-2'>
-                  Sản phẩm đã mua:
-                  {order.products.map((product) => (
-                    <div key={product._id}>{product.name}</div>
-                  ))}
+                <p className='flex flex-col items-center gap-2'>
+                  <div>Sản phẩm đã mua:</div>
+                  <div>
+                    {order.products.map((product) => (
+                      <div key={product._id}>
+                        <div className='capitalize'>{product.name}</div>
+                      </div>
+                    ))}
+                  </div>
                 </p>
                 <p>
                   Tổng tiền:{' '}
@@ -59,6 +65,7 @@ const WatchedMovies = () => {
                     currency: 'VND',
                   })}
                 </p>
+                <p className='mt-6 text-2xl font-bold'>{order.orderCode}</p>
               </li>
             ))}
           </ul>

@@ -148,15 +148,15 @@ const UpdateMovie = () => {
         movieFormat,
       } = reqBody
 
-      const currentDate = new Date()
-      if (new Date(releaseDate) < currentDate) {
-        Swal.fire(
-          '',
-          'Ngày phát hành không được nhỏ hơn ngày hiện tại!',
-          'error',
-        )
-        return
-      }
+      // const currentDate = new Date()
+      // if (new Date(releaseDate) < currentDate) {
+      //   Swal.fire(
+      //     '',
+      //     'Ngày phát hành không được nhỏ hơn ngày hiện tại!',
+      //     'error',
+      //   )
+      //   return
+      // }
 
       const data = {
         id,

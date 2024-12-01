@@ -94,7 +94,6 @@ const ResetPassword = () => {
             Thay đổi mật khẩu của bạn
           </div>
         </div>
-
         <form onSubmit={handleSubmit(handleResetPassword)} className='w-full'>
           <FormInputGroup
             register={register}
@@ -119,7 +118,6 @@ const ResetPassword = () => {
             }
             icon={<FileLock />}
           />
-
           <FormInputGroup
             register={register}
             errors={errors}
@@ -150,7 +148,6 @@ const ResetPassword = () => {
             icon={<Mail />}
           />
           <PasswordStrength password={password} />
-
           <button
             type='submit'
             className='mt-5 flex w-full cursor-pointer items-center justify-center rounded-[40px] bg-[#f97417] p-5 text-base font-semibold capitalize text-white transition duration-300 hover:opacity-80'

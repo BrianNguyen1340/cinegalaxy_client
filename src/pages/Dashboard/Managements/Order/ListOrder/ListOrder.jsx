@@ -1,8 +1,11 @@
 import { useEffect, useState } from 'react'
 import ReactPaginate from 'react-paginate'
+import { useSelector } from 'react-redux'
 import { useGetOrdersQuery } from '~/services/order.service'
 
 const ListOrder = () => {
+  const { user } = useSelector((state) => state.user)
+
   const { data: orders, refetch } = useGetOrdersQuery({})
 
   useEffect(() => {
@@ -11,13 +14,13 @@ const ListOrder = () => {
 
   const [currentPage, setCurrentPage] = useState(0)
   const itemsPerPage = 10
+
+  const filterOrders = orders?.data?.filter((item) => {
+    return item.showtimeId.cinemaId._id === user.cinemaId
+  })
+
   const offset = currentPage * itemsPerPage
-  const currentItems = orders
-    ? orders?.data
-        ?.slice()
-        ?.reverse()
-        ?.slice(offset, offset + itemsPerPage)
-    : []
+  const currentItems = filterOrders?.slice(offset, offset + itemsPerPage)
 
   const handlePageClick = (event) => {
     setCurrentPage(event.selected)
@@ -38,6 +41,7 @@ const ListOrder = () => {
                 <th className='w-[100px]'>tài khoản</th>
                 <th className='w-[100px]'>trạng thái</th>
                 <th className='w-[100px]'>ngày đặt vé</th>
+                <th className='w-[100px]'>rạp</th>
                 <th className='w-[100px]'>phương thức thanh toán</th>
                 <th className='w-[100px]'>tổng tiền đơn hàng</th>
               </tr>
@@ -55,6 +59,9 @@ const ListOrder = () => {
                     )}
                   </td>
                   <td>{new Date(item.createdAt).toLocaleDateString()}</td>
+                  <td className='capitalize'>
+                    {item.showtimeId.cinemaId.name}
+                  </td>
                   <td>{item.paymentMethod}</td>
                   <td>
                     {item.totalPrice.toLocaleString('vi-VN', {

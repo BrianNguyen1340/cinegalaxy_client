@@ -7,7 +7,6 @@ import { useGetMovieTicketsQuery } from '~/services/movieTicket.service'
 
 const ListMovieTicket = () => {
   const { data: serviceTickets, refetch } = useGetMovieTicketsQuery({})
-  console.log(serviceTickets)
 
   useEffect(() => {
     refetch()

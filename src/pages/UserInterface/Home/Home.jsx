@@ -8,12 +8,12 @@ import { BeatLoader } from 'react-spinners'
 import Slider from 'react-slick'
 
 import { useGetMoviesQuery } from '~/services/movie.service'
-import { useGetShowtimesQuery } from '~/services/showtime.service'
 import { paths } from '~/utils/paths'
 import useTitle from '~/hooks/useTitle'
 
 const Home = () => {
   useTitle('Trang chủ')
+
   const { isAuthenticated, user } = useSelector((state) => state.user)
   const isAuthorized =
     isAuthenticated &&
@@ -62,16 +62,14 @@ const Home = () => {
     refetch: refetchMovies,
   } = useGetMoviesQuery({})
 
-  const { data: showtimes, refetch } = useGetShowtimesQuery({})
-
   useEffect(() => {
     refetchMovies()
-    refetch()
-  }, [refetchMovies, refetch])
+  }, [refetchMovies])
 
-  const moviesToDisplay = (movies?.data?.slice(0, 7) || []).filter(
-    (movie) => movie.hidden === false,
-  )
+  const moviesToDisplay = (movies?.data || [])
+    .filter((movie) => movie.hidden === false)
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 7)
 
   const currentDate = new Date()
 
@@ -92,7 +90,7 @@ const Home = () => {
   if (isSuccessMovies) {
     content = (
       <div className='h-fit w-full'>
-        <section className='mt-6 flex h-[650px] items-start gap-6 overflow-hidden'>
+        <section className='mt-6 flex h-[586px] items-start gap-6 overflow-hidden'>
           <div
             style={{ width: 'calc(100% - 430px)' }}
             className='flex items-center justify-center'
@@ -107,14 +105,14 @@ const Home = () => {
               navigation={true}
               modules={[Autoplay, EffectFade, Navigation]}
             >
-              {movies?.data?.map((item, index) => (
+              {releasedMovies?.map((item, index) => (
                 <SwiperSlide key={index}>
                   <img src={item.bannerURL} alt='banner' className='w-full' />
                 </SwiperSlide>
               ))}
             </Swiper>
           </div>
-          <div className='h-fit min-w-[400px]'>
+          <div className='min-w-[400px]'>
             <div
               style={{ fontFamily: 'Dancing Script' }}
               className='bg-[#2a2e33] py-6 text-center text-3xl font-semibold text-[#dad2b4]'
@@ -134,6 +132,34 @@ const Home = () => {
                           <div className='text-xl font-semibold italic'>
                             {index + 1}.
                           </div>
+                          {item.ageRating === 'P - Phổ biến' && (
+                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#088210] p-2 text-white'>
+                              P
+                            </div>
+                          )}
+                          {item.ageRating === 'K - Dành cho trẻ em' && (
+                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#ffa904] p-2 text-white'>
+                              K
+                            </div>
+                          )}
+                          {item.ageRating ===
+                            'C13 - Cấm khán giả dưới 13 tuổi' && (
+                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#246ed8] p-2 text-white'>
+                              13
+                            </div>
+                          )}
+                          {item.ageRating ===
+                            'C16 - Cấm khán giả dưới 16 tuổi' && (
+                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#c60672] p-2 text-white'>
+                              16
+                            </div>
+                          )}
+                          {item.ageRating ===
+                            'C18 - Cấm khán giả dưới 18 tuổi' && (
+                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#e80808] p-2 text-white'>
+                              18
+                            </div>
+                          )}
                           <div className='w-[150px] overflow-hidden text-ellipsis text-nowrap text-sm font-bold uppercase'>
                             {item.name}
                           </div>
@@ -163,7 +189,7 @@ const Home = () => {
             </Link>
           </div>
         </section>
-        <section className='mx-auto w-[1300px] pb-10'>
+        <section className='mx-auto w-[1300px] py-10'>
           <div className='mb-10 text-center text-[24px] font-semibold capitalize'>
             phim đang chiếu
           </div>
@@ -209,34 +235,3 @@ const Home = () => {
 }
 
 export default Home
-
-{
-  /* {item.movieRating === 'P - Phổ biến' && (
-                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#088210] p-2 text-white'>
-                              P
-                            </div>
-                          )}
-                          {item.movieRating === 'K - Dành cho trẻ em' && (
-                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
-                              K
-                            </div>
-                          )}
-                          {item.movieRating ===
-                            'C13 - Cấm khán giả dưới 13 tuổi' && (
-                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
-                              13
-                            </div>
-                          )}
-                          {item.movieRating ===
-                            'C16 - Cấm khán giả dưới 16 tuổi' && (
-                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-black p-2 text-white'>
-                              16
-                            </div>
-                          )}
-                          {item.movieRating ===
-                            'C18 - Cấm khán giả dưới 18 tuổi' && (
-                            <div className='flex h-6 w-6 items-center justify-center rounded-full border bg-[#e80808] p-2 text-white'>
-                              18
-                            </div>
-                          )} */
-}

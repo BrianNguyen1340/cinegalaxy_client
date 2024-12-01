@@ -40,6 +40,13 @@ export const userAPISlice = apiSlice.injectEndpoints({
         body: data,
       }),
     }),
+    updateEmployee: builder.mutation({
+      query: (data) => ({
+        url: `/api/v1/user/update-employee/${data.id}`,
+        method: 'PUT',
+        body: data,
+      }),
+    }),
     blockAccount: builder.mutation({
       query: (id) => ({
         url: `/api/v1/user/block-user/${id}`,
@@ -98,4 +105,5 @@ export const {
   useGetCashiersQuery,
   useTotalSystemUsersQuery,
   useTotalUsersQuery,
+  useUpdateEmployeeMutation,
 } = userAPISlice

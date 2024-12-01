@@ -88,6 +88,8 @@ const ListCinema = () => {
                 <tr>
                   <th className='w-[100px]'>no.</th>
                   <th>tên rạp</th>
+                  <th>địa chỉ</th>
+                  <th>số điện thoại</th>
                   <th>cụm rạp</th>
                   <th>hành động</th>
                 </tr>
@@ -97,6 +99,8 @@ const ListCinema = () => {
                   <tr key={index}>
                     <td>{index + offset}</td>
                     <td className='capitalize'>{item.name}</td>
+                    <td className='text-wrap capitalize'>{item.address}</td>
+                    <td className='text-wrap capitalize'>{item.phone}</td>
                     <td className='capitalize'>{item.cinemaComplexId.name}</td>
                     <td>
                       <div className='flex items-center justify-center'>

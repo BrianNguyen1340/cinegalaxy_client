@@ -174,21 +174,6 @@ const Sidebar = ({ openSidebar, setOpenSidebar, style }) => {
                   }
                 />
                 <SidebarMenu
-                  spanTitle='Đơn đặt hàng'
-                  icon={<ShieldCheck size='16' />}
-                  item={
-                    <>
-                      <SidebarMenuItem
-                        path={paths.dashboardPaths.managements.orders.list}
-                        spanText='danh sách đơn đặt hàng'
-                        spanTitle='L'
-                        isSelected={selectedMenuItem === location.pathname}
-                        onSelect={() => setSelectedMenuItem(location.pathname)}
-                      />
-                    </>
-                  }
-                />
-                <SidebarMenu
                   spanTitle='Cụm rạp'
                   icon={<Clapperboard size='16' />}
                   item={
@@ -347,6 +332,21 @@ const Sidebar = ({ openSidebar, setOpenSidebar, style }) => {
                             .listCashiers
                         }
                         spanText='danh sách tài khoản'
+                        spanTitle='L'
+                        isSelected={selectedMenuItem === location.pathname}
+                        onSelect={() => setSelectedMenuItem(location.pathname)}
+                      />
+                    </>
+                  }
+                />
+                <SidebarMenu
+                  spanTitle='Đơn đặt hàng'
+                  icon={<ShieldCheck size='16' />}
+                  item={
+                    <>
+                      <SidebarMenuItem
+                        path={paths.dashboardPaths.managements.orders.list}
+                        spanText='danh sách đơn đặt hàng'
                         spanTitle='L'
                         isSelected={selectedMenuItem === location.pathname}
                         onSelect={() => setSelectedMenuItem(location.pathname)}

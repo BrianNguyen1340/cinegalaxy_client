@@ -28,8 +28,8 @@ const CreateGenre = () => {
 
       const response = await createApi({ name }).unwrap()
 
-      // Swal.fire('Thành công', response.message, 'success')
-      // navigate(paths.dashboardPaths.managements.genres.list)
+      Swal.fire('Thành công', response.message, 'success')
+      navigate(paths.dashboardPaths.managements.genres.list)
     } catch (error) {
       Swal.fire('Thất bại', error?.data?.message, 'error')
     } finally {

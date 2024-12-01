@@ -118,16 +118,18 @@ const CreateShowtime = () => {
               {...register('promotionId')}
             >
               <option value=''>Chọn mã khuyến mãi</option>
-              {promotions?.data?.map((item, index) => (
-                <option key={index} value={item._id}>
-                  {item.name} -{' '}
-                  {item.type === 'percentage'
-                    ? `${item.value}%`
-                    : item.type === 'fixed'
-                      ? `${item.value}đ`
-                      : ''}
-                </option>
-              ))}
+              {promotions?.data
+                ?.filter((item) => item.cinemaId._id === user?.cinemaId)
+                .map((item, index) => (
+                  <option key={index} value={item._id}>
+                    {item.name} -{' '}
+                    {item.type === 'percentage'
+                      ? `${item.value}%`
+                      : item.type === 'fixed'
+                        ? `${item.value}đ`
+                        : ''}
+                  </option>
+                ))}
             </select>
           </div>
 

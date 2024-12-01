@@ -7,7 +7,15 @@ export const revenueAPISlice = apiSlice.injectEndpoints({
         url: `/api/v1/revenue/order-revenue`,
       }),
     }),
+    calculateTotalMovieTicketRevenue: builder.query({
+      query: () => ({
+        url: `/api/v1/revenue/cinema-revenue`,
+      }),
+    }),
   }),
 })
 
-export const { useCalculateTotalOrderRevenueQuery } = revenueAPISlice
+export const {
+  useCalculateTotalOrderRevenueQuery,
+  useCalculateTotalMovieTicketRevenueQuery,
+} = revenueAPISlice

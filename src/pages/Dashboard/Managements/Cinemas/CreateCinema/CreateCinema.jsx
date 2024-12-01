@@ -37,10 +37,12 @@ const CreateCinema = () => {
   const handleCreate = async (reqBody) => {
     try {
       nProgress.start()
-      const { name, cinemaComplexId } = reqBody
+      const { name, address, cinemaComplexId } = reqBody
 
       const response = await createApi({
         name,
+        address,
+        phone: '0123456789',
         cinemaComplexId,
       }).unwrap()
 
@@ -85,6 +87,20 @@ const CreateCinema = () => {
             placeholder='Vui lòng nhập tên rạp'
             type='text'
             name='name'
+          />
+
+          <FormInputGroup
+            register={register}
+            errors={errors}
+            validation={{
+              required: 'Vui lòng nhập địa chỉ rạp!',
+            }}
+            labelChildren='địa chỉ rạp'
+            htmlFor='address'
+            id='address'
+            placeholder='Vui lòng nhập địa chỉ rạp'
+            type='text'
+            name='address'
           />
 
           <div className='mb-5 flex flex-col'>

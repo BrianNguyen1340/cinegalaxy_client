@@ -24,6 +24,8 @@ import {
   WatchedMovies,
   OrderSuccess,
   OrderCancel,
+  Cinemas,
+  About,
 
   // *** PRIVATE AUTH
   PrivateLogin,
@@ -105,6 +107,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/' element={<App />}>
               {/* PUBLIC ROUTES */}
               <Route index path='/' element={<Home />} />
+              <Route path={paths.userPaths.about} element={<About />} />
               <Route path={paths.userPaths.register} element={<Register />} />
               <Route path={paths.userPaths.verifyOtp} element={<VerifyOTP />} />
               <Route path={paths.userPaths.login} element={<Login />} />
@@ -124,10 +127,6 @@ createRoot(document.getElementById('root')).render(
               <Route
                 path={paths.userPaths.movieDetails}
                 element={<MovieDetails />}
-              />
-              <Route
-                path={paths.userPaths.orderSuccess}
-                element={<OrderSuccess />}
               />
               <Route
                 path={paths.userPaths.orderCancel}
@@ -155,7 +154,11 @@ createRoot(document.getElementById('root')).render(
                   path={paths.userPaths.showtimeDetails}
                   element={<ShowtimeDetails />}
                 />
-
+                <Route
+                  path={paths.userPaths.orderSuccess}
+                  element={<OrderSuccess />}
+                />
+                <Route path={paths.userPaths.cinemas} element={<Cinemas />} />
                 <Route path={paths.userPaths.account} element={<Account />} />
                 <Route path={paths.userPaths.profile} element={<Profile />} />
                 <Route

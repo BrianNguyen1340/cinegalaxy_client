@@ -2,54 +2,52 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
-import { FaRegStar } from 'react-icons/fa'
 import Swal from 'sweetalert2'
 import nProgress from 'nprogress'
 
 import { useCreateSeatMutation } from '~/services/seat.service'
 import { useGetRoomsQuery } from '~/services/room.service'
 import { paths } from '~/utils/paths'
-import { FormInputGroup } from '~/components'
 import useTitle from '~/hooks/useTitle'
 
 const CreateSeat = () => {
   useTitle('Admin | Tạp ghế')
   const navigate = useNavigate()
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
-
+  const { register, handleSubmit } = useForm()
   const {
     data: rooms,
     isLoading: isLoadingRooms,
     isSuccess: isSuccessRooms,
     refetch: refetchRooms,
   } = useGetRoomsQuery({})
-
   useEffect(() => {
     refetchRooms()
   }, [refetchRooms])
-
   const [createApi, { isLoading: isLoadingCreate }] = useCreateSeatMutation()
-
-  const handleCreate = async (reqBody) => {
+  const handleCreate = async ({ roomId }) => {
     try {
       nProgress.start()
-      const { row, number, type, price, roomId } = reqBody
-
-      const response = await createApi({
-        row,
-        number,
-        type,
-        price,
-        roomId,
-      }).unwrap()
-
-      // Swal.fire('Thành công', response.message, 'success')
-      // navigate(paths.dashboardPaths.managements.seats.list)
+      const seatData = []
+      const prices = { Standard: 60000, Vip: 80000, Couple: 100000 }
+      for (let row of 'ABCDEFGHIJ') {
+        const type =
+          row >= 'A' && row <= 'C'
+            ? 'Standard'
+            : row >= 'D' && row <= 'I'
+              ? 'Vip'
+              : 'Couple'
+        for (let number = 1; number <= 10; number++) {
+          seatData.push({
+            row,
+            number,
+            type,
+            price: prices[type],
+            roomId,
+          })
+        }
+      }
+      await Promise.all(seatData.map((seat) => createApi(seat).unwrap()))
+      Swal.fire('Thành công', 'Tạo nhanh ghế thành công!', 'success')
     } catch (error) {
       Swal.fire('Thất bại', error?.data?.message, 'error')
     } finally {
@@ -70,6 +68,49 @@ const CreateSeat = () => {
           className='mx-auto w-[500px]'
         >
           <div className='mb-5 flex flex-col'>
+            <label htmlFor='roomId' className='mb-1 font-semibold capitalize'>
+              phòng
+            </label>
+            <select
+              {...register('roomId', {
+                required: 'Vui lòng chọn loại ghế',
+              })}
+              id='roomId'
+              name='roomId'
+              className='p-2 capitalize'
+            >
+              <option value=''>Chọn phòng</option>
+              {rooms?.data?.map((room, index) => (
+                <option key={index} value={room._id}>
+                  {room.name} - {room.cinemaId.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <button
+            type='submit'
+            disabled={isLoadingCreate ? true : false}
+            className='rounded bg-black px-4 py-3 font-semibold text-white transition duration-300 hover:opacity-70'
+          >
+            <div className='flex items-center justify-center gap-3'>
+              {isLoadingCreate && <HashLoader size='20' color='#fff' />}
+              <span className='capitalize'>
+                {isLoadingCreate ? 'đang lưu' : 'lưu'}
+              </span>
+            </div>
+          </button>
+        </form>
+      </div>
+    )
+  }
+
+  return content
+}
+
+export default CreateSeat
+
+/**
+ * <div className='mb-5 flex flex-col'>
             <label className='mb-1 font-semibold capitalize'>hàng ghế</label>
             <select
               {...register('row', {
@@ -137,7 +178,6 @@ const CreateSeat = () => {
               </div>
             )}
           </div>
-
           <FormInputGroup
             register={register}
             errors={errors}
@@ -152,46 +192,5 @@ const CreateSeat = () => {
             name='price'
             icon={<FaRegStar color='red' />}
           />
-
-          <div className='mb-5 flex flex-col'>
-            <label htmlFor='roomId' className='mb-1 font-semibold capitalize'>
-              phòng
-            </label>
-            <select
-              {...register('roomId', {
-                required: 'Vui lòng chọn loại ghế',
-              })}
-              id='roomId'
-              name='roomId'
-              className='p-2 capitalize'
-            >
-              <option value=''>Chọn phòng</option>
-              {rooms?.data?.map((room, index) => (
-                <option key={index} value={room._id}>
-                  {room.name} - {room.cinemaId.name}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <button
-            type='submit'
-            disabled={isLoadingCreate ? true : false}
-            className='rounded bg-black px-4 py-3 font-semibold text-white transition duration-300 hover:opacity-70'
-          >
-            <div className='flex items-center justify-center gap-3'>
-              {isLoadingCreate && <HashLoader size='20' color='#fff' />}
-              <span className='capitalize'>
-                {isLoadingCreate ? 'đang lưu' : 'lưu'}
-              </span>
-            </div>
-          </button>
-        </form>
-      </div>
-    )
-  }
-
-  return content
-}
-
-export default CreateSeat
+ *
+ */

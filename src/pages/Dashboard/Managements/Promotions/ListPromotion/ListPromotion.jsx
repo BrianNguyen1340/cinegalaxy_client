@@ -5,15 +5,18 @@ import ReactPaginate from 'react-paginate'
 
 import { useGetPromotionsQuery } from '~/services/promotion.service'
 import useTitle from '~/hooks/useTitle'
+import { useSelector } from 'react-redux'
 
 const ListPromotion = () => {
   useTitle('Manager | Danh sách mã khuyến mãi')
+  const { user } = useSelector((state) => state.user)
 
-  const { data: promotions, refetch } = useGetPromotionsQuery({})
+  const { data: promotions, refetch: refetchPromotions } =
+    useGetPromotionsQuery({})
 
   useEffect(() => {
-    refetch()
-  }, [refetch])
+    refetchPromotions()
+  }, [refetchPromotions])
 
   const [currentPage, setCurrentPage] = useState(0)
   const itemsPerPage = 10
@@ -22,6 +25,7 @@ const ListPromotion = () => {
     ? promotions?.data
         ?.slice()
         ?.reverse()
+        ?.filter((promotion) => promotion.cinemaId._id === user?.cinemaId)
         ?.slice(offset, offset + itemsPerPage)
     : []
 
@@ -94,7 +98,7 @@ const ListPromotion = () => {
           />
         </>
       ) : (
-        <div>Danh sách cụm rạp trống!</div>
+        <div>Danh sách mã khuyến mãi trống!</div>
       )}
     </div>
   )
