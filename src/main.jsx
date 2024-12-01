@@ -107,6 +107,7 @@ createRoot(document.getElementById('root')).render(
             <Route path='/' element={<App />}>
               {/* PUBLIC ROUTES */}
               <Route index path='/' element={<Home />} />
+              <Route path={paths.userPaths.cinemas} element={<Cinemas />} />
               <Route path={paths.userPaths.about} element={<About />} />
               <Route path={paths.userPaths.register} element={<Register />} />
               <Route path={paths.userPaths.verifyOtp} element={<VerifyOTP />} />
@@ -158,7 +159,6 @@ createRoot(document.getElementById('root')).render(
                   path={paths.userPaths.orderSuccess}
                   element={<OrderSuccess />}
                 />
-                <Route path={paths.userPaths.cinemas} element={<Cinemas />} />
                 <Route path={paths.userPaths.account} element={<Account />} />
                 <Route path={paths.userPaths.profile} element={<Profile />} />
                 <Route
