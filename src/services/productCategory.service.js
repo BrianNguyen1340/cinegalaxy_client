@@ -5,24 +5,24 @@ export const productCategoryAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createProductCategory: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/product-category/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/product-category/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getProductCategory: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/product-category/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/product-category/get/${id}`,
       }),
     }),
     getProductCategories: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/product-category/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/product-category/get-all`,
       }),
     }),
     updateProductCategory: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/product-category/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/product-category/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),

@@ -5,14 +5,14 @@ export const showtimeSeatStatusAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createShowtimeSeatStatus: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/showtime-seat-status/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime-seat-status/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getAllShowtimeSeatStatus: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/showtime-seat-status/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime-seat-status/get-all`,
       }),
     }),
   }),

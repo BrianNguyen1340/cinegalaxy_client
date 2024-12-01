@@ -5,19 +5,19 @@ export const movieTicketAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createMovieTicket: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/movie-ticket/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/movie-ticket/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getMovieTickets: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/movie-ticket/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/movie-ticket/get-all`,
       }),
     }),
     getMovieTicket: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/movie-ticket/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/movie-ticket/get/${id}`,
       }),
     }),
   }),

@@ -5,12 +5,12 @@ export const revenueAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     calculateTotalOrderRevenue: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/revenue/order-revenue`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/revenue/order-revenue`,
       }),
     }),
     calculateTotalMovieTicketRevenue: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/revenue/cinema-revenue`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/revenue/cinema-revenue`,
       }),
     }),
   }),

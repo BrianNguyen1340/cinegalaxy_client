@@ -5,31 +5,31 @@ export const seatAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createSeat: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/seat/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/seat/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getSeat: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/seat/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/seat/get/${id}`,
       }),
     }),
     getSeats: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/seat/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/seat/get-all`,
       }),
     }),
     updateSeat: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/seat/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/seat/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     deleteSeat: builder.mutation({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/seat/delete/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/seat/delete/${id}`,
         method: 'DELETE',
       }),
     }),

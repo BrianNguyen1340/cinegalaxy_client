@@ -5,31 +5,31 @@ export const cinemaAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCinema: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/cinema/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getCinema: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/cinema/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema/get/${id}`,
       }),
     }),
     getCinemas: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/cinema/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema/get-all`,
       }),
     }),
     updateCinema: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/cinema/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     totalCinema: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/cinema/total`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema/total`,
       }),
     }),
   }),

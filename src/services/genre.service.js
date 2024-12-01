@@ -5,24 +5,24 @@ export const genreAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createGenre: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/genre/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/genre/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getGenre: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/genre/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/genre/get/${id}`,
       }),
     }),
     getGenres: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/genre/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/genre/get-all`,
       }),
     }),
     updateGenre: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/genre/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/genre/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),

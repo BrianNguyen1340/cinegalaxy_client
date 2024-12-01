@@ -5,43 +5,43 @@ export const showtimeAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createShowtime: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/showtime/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getShowtime: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/showtime/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/get/${id}`,
       }),
     }),
     getShowtimes: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/showtime/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/get-all`,
       }),
     }),
     updateShowtime: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/showtime/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     hideShowtime: builder.mutation({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/showtime/hide/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/hide/${id}`,
         method: 'PUT',
       }),
     }),
     showShowtime: builder.mutation({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/showtime/show/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/show/${id}`,
         method: 'PUT',
       }),
     }),
     totalShowtimes: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/showtime/total`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/showtime/total`,
       }),
     }),
   }),

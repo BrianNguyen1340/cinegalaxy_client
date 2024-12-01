@@ -5,31 +5,31 @@ export const cinemaComplexAPISlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     createCinemaComplex: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/cinema-complex/create`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema-complex/create`,
         method: 'POST',
         body: data,
       }),
     }),
     getCinemaComplex: builder.query({
       query: (id) => ({
-        url: `${API_ROOT}/api/v1/cinema-complex/get/${id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema-complex/get/${id}`,
       }),
     }),
     getCinemaComplexes: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/cinema-complex/get-all`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema-complex/get-all`,
       }),
     }),
     updateCinemaComplex: builder.mutation({
       query: (data) => ({
-        url: `${API_ROOT}/api/v1/cinema-complex/update/${data.id}`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema-complex/update/${data.id}`,
         method: 'PUT',
         body: data,
       }),
     }),
     totalCinemaComplex: builder.query({
       query: () => ({
-        url: `${API_ROOT}/api/v1/cinema-complex/total`,
+        url: `https://cinegalaxy-server.onrender.com/api/v1/cinema-complex/total`,
       }),
     }),
   }),
