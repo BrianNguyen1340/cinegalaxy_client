@@ -8,8 +8,8 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/api/v1/': 'http://localhost:7777',
-      '/uploads/': 'http://localhost:7777',
+      '/api/v1/': 'https://cinegalaxy-server.onrender.com',
+      '/uploads/': 'https://cinegalaxy-server.onrender.com',
     },
     port: 3000,
   },
